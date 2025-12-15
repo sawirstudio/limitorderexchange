@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('status')->default(1);
             $table->timestamps();
 
-            $table->index(['symbol', 'user_id', 'status']);
+            $table->index(['symbol', 'status', 'user_id']);
         });
     }
 
