@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use App\Enums\Symbol;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +16,7 @@ class Order extends Model
     {
         return [
             'side' => 'boolean',
+            'symbol' => Symbol::class,
             'status' => OrderStatus::class,
         ];
     }
