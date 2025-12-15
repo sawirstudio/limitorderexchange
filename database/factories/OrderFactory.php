@@ -21,6 +21,7 @@ class OrderFactory extends Factory
             'symbol' => fake()->randomElement(['BTC', 'ETH']),
             'price' => fake()->numberBetween(),
             'amount' => fake()->numberBetween(),
+            'user_id' => fake()->numberBetween(),
         ];
     }
 }
