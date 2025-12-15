@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('user_id');
             $table->string('symbol')->default('BTC');
             $table->decimal('amount', 19, 8)->default(0);
             $table->decimal('locked_amount', 19, 8)->nullable();
             $table->timestamps();
+
+            $table->index(['user_id', 'symbol']);
         });
     }
 
