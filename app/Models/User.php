@@ -47,4 +47,5 @@ class User extends Authenticatable
     }
 
     public function assets(){return $this->hasMany(Asset::class);}
+    public function orders(){return $this->hasMany(Order::class);}
 }
