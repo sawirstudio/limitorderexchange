@@ -14,6 +14,7 @@ class Order extends Model
     protected function casts()
     {
         return [
+            'side' => 'boolean',
             'status' => OrderStatus::class,
         ];
     }
