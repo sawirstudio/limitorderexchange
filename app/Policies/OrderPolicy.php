@@ -8,8 +8,12 @@ use Illuminate\Auth\Access\Response;
 
 class OrderPolicy
 {
-    public function cancel(User $user, Order $order): bool
+    public function cancel(User $user, Order $order): Response
     {
-        return $user->getKey() == $order->user_id;
+        if ($user->getKey() == $order->user_id) {
+            return Response::allow();
+        }
+
+        return Response::denyAsNotFound();
     }
 }
