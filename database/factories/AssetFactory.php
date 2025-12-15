@@ -18,7 +18,7 @@ class AssetFactory extends Factory
     {
         return [
             'symbol' => fake()->randomElement(['BTC', 'ETH']),
-            'amount' => fake()->numberBetween(),
+            'amount' => fake()->numberBetween(0, 100),
         ];
     }
 }
