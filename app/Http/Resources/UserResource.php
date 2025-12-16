@@ -19,9 +19,10 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->resource->getKey(),
             'name' => $this->resource->name,
             'balance' => $this->resource->balance,
-            'assets_sum_amount' => $this->resource->assets_sum_amount ?? 0,
+            'assets' => AssetResource::collection($this->whenLoaded('assets')),
         ];
     }
 }
