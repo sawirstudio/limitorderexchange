@@ -16,8 +16,6 @@ php artisan migrate:fresh --seed
 
 3. for the best experience, I recommend to use [Herd](https://herd.laravel.com), I also have provided you a herd blueprint file. However, if you use docker, there's also a docker-compose file provided.
 
-4. for backend, you can run it using php artisan serve
+4. You can run it using php artisan serve
 
-5. for frontend, you can run it using npm run dev (or any of your package manager choice)
-
-6. for testing, you can run it using php artisan test
+5. for testing, you can run it using php artisan test
