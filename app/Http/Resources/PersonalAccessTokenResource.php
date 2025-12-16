@@ -13,7 +13,7 @@ class PersonalAccessTokenResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "token" => $this->resource->plainTextToken,
+            'token' => $this->resource->plainTextToken,
         ];
     }
 }
