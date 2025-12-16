@@ -19,3 +19,5 @@ php artisan migrate:fresh --seed
 4. for backend, you can run it using php artisan serve
 
 5. for frontend, you can run it using npm run dev (or any of your package manager choice)
+
+6. for testing, you can run it using php artisan test
