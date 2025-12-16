@@ -19,15 +19,15 @@ ARG GROUP_ID=82
 
 # USER www-data
 
-FROM node:20-slim AS static-assets
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
-WORKDIR /app
-COPY package*.json vite.config.ts pnpm-lock.yaml tsconfig.json tsconfig.node.json tsconfig.app.json ./
-COPY . .
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-RUN pnpm run build
+# FROM node:20-slim AS static-assets
+# ENV PNPM_HOME="/pnpm"
+# ENV PATH="$PNPM_HOME:$PATH"
+# RUN corepack enable
+# WORKDIR /app
+# COPY package*.json vite.config.ts pnpm-lock.yaml tsconfig.json tsconfig.node.json tsconfig.app.json ./
+# COPY . .
+# RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+# RUN pnpm run build
 
 
 FROM serversideup/php:8.4-frankenphp-alpine
@@ -67,7 +67,7 @@ ENV PHP_OPCACHE_ENABLE=1
 ENV SSL_MODE=mixed
 
 # COPY --from=base --chown=www-data:www-data /var/www/html/vendor ./vendor
-COPY --from=static-assets --chown=www-data:www-data /app/public/build ./public/build
+# COPY --from=static-assets --chown=www-data:www-data /app/public/build ./public/build
 COPY --chown=www-data:www-data composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --no-plugins --no-scripts --prefer-dist && \
     composer dump-autoload
