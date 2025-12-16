@@ -1,5 +1,7 @@
 # SawirStudio Order Exchange
 
+![Order Exchange](ss.png)
+
 ## How to run
 
 1. Clone the repository and initial setup
