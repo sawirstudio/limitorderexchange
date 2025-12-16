@@ -26,7 +26,7 @@ const ordersQuery = useQuery({
 });
 
 const cancelOrderMutation = useMutation({
-    onSuccess: (response) => {
+    onSuccess: () => {
         toast("Success cancel order");
         queryClient.invalidateQueries({ queryKey: ["orderbook"] });
         queryClient.invalidateQueries({ queryKey: ["pastorder"] });
@@ -162,7 +162,7 @@ const cancelOrderMutation = useMutation({
                                 <td
                                     class="px-2 py-2 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400"
                                 >
-                                    {{ order.side ? 'BUY' : 'SELL' }}
+                                    {{ order.side ? "BUY" : "SELL" }}
                                 </td>
                                 <td
                                     class="px-2 py-2 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400"
@@ -177,9 +177,11 @@ const cancelOrderMutation = useMutation({
                                 <td
                                     class="px-2 py-2 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400"
                                 >
-                                <span v-if="order.status == 1">OPEN</span>
-                                <span v-if="order.status == 2">FILLED</span>
-                                <span v-if="order.status == 3">CANCELLED</span>
+                                    <span v-if="order.status == 1">OPEN</span>
+                                    <span v-if="order.status == 2">FILLED</span>
+                                    <span v-if="order.status == 3"
+                                        >CANCELLED</span
+                                    >
                                 </td>
                                 <td
                                     class="px-2 py-2 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400"

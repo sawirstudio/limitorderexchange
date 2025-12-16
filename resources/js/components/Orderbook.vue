@@ -100,7 +100,7 @@ const orderbookQuery = useQuery({
                             class="divide-y divide-gray-200 bg-white dark:divide-white/10 dark:bg-gray-900"
                         >
                             <tr
-                                v-for="order in orderbookQuery.data.value.data"
+                                v-for="order in orderbookQuery.data.value?.data"
                                 :key="order.level"
                             >
                                 <td

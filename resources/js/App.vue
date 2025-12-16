@@ -13,10 +13,15 @@ const profileQuery = useQuery({
     queryFn: () => getProfile(),
 });
 
-const tabs = computed(() => [
-    { name: "Orderbook", href: "#orderbook", auth: undefined },
-    { name: "Past Orders", href: "#past-orders", auth: true },
-].filter(tab => tab.auth === undefined || (!!profileQuery.data.value && tab.auth)));
+const tabs = computed(() =>
+    [
+        { name: "Orderbook", href: "#orderbook", auth: undefined },
+        { name: "Past Orders", href: "#past-orders", auth: true },
+    ].filter(
+        (tab) =>
+            tab.auth === undefined || (!!profileQuery.data.value && tab.auth)
+    )
+);
 const selectedTab = ref("#orderbook");
 </script>
 
@@ -63,7 +68,7 @@ const selectedTab = ref("#orderbook");
                                 : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-white/20 dark:hover:text-gray-200',
                             'border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap',
                         ]"
-                        :aria-current="tab.current ? 'page' : undefined"
+                        :aria-current="true ? 'page' : undefined"
                         >{{ tab.name }}</a
                     >
                 </nav>

@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { createOrder, type Profile, type CreateOrderRequest } from "../api";
+import {
+    createOrder,
+    type Profile,
+    type CreateOrderRequest,
+    type Order,
+} from "../api";
 import { useEcho } from "@laravel/echo-vue";
 import { useForm } from "@tanstack/vue-form";
 import { useMutation, useQueryClient } from "@tanstack/vue-query";
@@ -9,10 +14,13 @@ import { toast } from "vue-sonner";
 const props = defineProps<{ profile?: { data: Profile } }>();
 const profileData = ref(props.profile?.data);
 const queryClient = useQueryClient();
-useEcho(`private-user.${props.profile?.data.id}`, ["OrderMatched"], (e) => {
-    console.log(e)
-    profileData.value = e.order.user
-});
+useEcho(
+    `private-user.${props.profile?.data.id}`,
+    ["OrderMatched"],
+    (e: { order: Order }) => {
+        profileData.value = e.order.user;
+    }
+);
 
 const orderForm = useForm({
     defaultValues: {

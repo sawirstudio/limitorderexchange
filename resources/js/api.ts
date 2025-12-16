@@ -73,7 +73,7 @@ export type CreatePersonalAccessTokenRequest = Parameters<
 export const deletePersonalAccessToken = () =>
     httpClient.delete("personal-access-token");
 
-type Order = {
+export type Order = {
     id: number | string;
     side: boolean;
     symbol: OrderSymbol;
@@ -81,6 +81,7 @@ type Order = {
     amount: string;
     status: number;
     created_at: string;
+    user?: Profile;
 };
 
 export const getOrders = (searchParams: Record<string, string>) =>
@@ -108,7 +109,7 @@ export const cancelOrder = (orderId: number | string) =>
     httpClient.post(`orders/${orderId}/cancel`);
 
 export type CreateOrderRequest = {
-    symbol: OrderSymbol;
+    symbol: OrderSymbol | string;
     side: number;
     price: number;
     amount: number;

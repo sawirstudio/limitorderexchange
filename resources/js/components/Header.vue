@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { createPersonalAccessToken, deletePersonalAccessToken, type CreatePersonalAccessTokenRequest, type Profile } from '../api';
 import { useForm } from '@tanstack/vue-form';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
+import { useMutation, useQueryClient } from '@tanstack/vue-query';
 import { type HTTPError } from 'ky';
 import { useTemplateRef } from 'vue';
 import { toast } from 'vue-sonner';
@@ -19,7 +19,7 @@ const loginForm = useForm({
         email: "",
         password: "",
     },
-    onSubmit: async ({ value, formApi }) => {
+    onSubmit: async ({ value }) => {
         loginMutation.mutate(value);
     },
 });
