@@ -17,7 +17,7 @@ test('cancel sell order', function () {
     $order->refresh();
     $asset->refresh();
     expect($order->status)->toBe(OrderStatus::CANCELED);
-    expect($asset->locked_amount)->toBeNull();
+    expect($asset->locked_amount)->toEqual(0);
     expect($asset->amount)->toEqual($initialAmount + $order->amount);
 });
 
