@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('price', 19, 8)->default(0);
             $table->decimal('amount', 19, 8)->default(0);
             $table->integer('status')->default(1);
+            $table->unsignedBigInteger('trade_id')->nullable();
             $table->timestamps();
 
             $table->index(['symbol', 'status', 'user_id']);
