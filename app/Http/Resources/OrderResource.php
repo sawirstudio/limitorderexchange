@@ -15,7 +15,7 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->resource->id,
-            'side' => $this->resource->side ? 'buy' : 'sell',
+            'side' => $this->resource->side,
             'symbol' => $this->resource->symbol,
             'price' => $this->resource->price,
             'amount' => $this->resource->amount,
