@@ -11,9 +11,7 @@ class GetProfileController extends Controller
     public function __invoke(Request $request)
     {
         return (fn (): User => $request->user())()
-            ->loadSum(relations: ['assets' => function ($query) {
-                return $query->whereNull('locked_amount');
-            }], column: 'amount')
+            ->load('assets')
             ->toResource();
     }
 }
