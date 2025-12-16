@@ -11,6 +11,8 @@
 |
 */
 
+use App\Enums\Symbol;
+
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
@@ -43,5 +45,13 @@ expect()->extend('toBeOne', function () {
 
 function user()
 {
-    return \App\Models\User::factory()->create();
+    $user = \App\Models\User::factory()->create();
+    foreach (Symbol::cases() as $symbol) {
+        \App\Models\Asset::factory()->for($user)->create([
+            'symbol' => $symbol,
+            'amount' => 0,
+            'locked_amount' => 0,
+        ]);
+    }
+    return $user;
 }
