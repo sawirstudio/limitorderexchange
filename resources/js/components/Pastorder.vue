@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { cancelOrder, getOrders, type OrderSymbol } from "../api";
+import { useEcho } from "@laravel/echo-vue";
+import {
+    cancelOrder,
+    getOrders,
+    type Order,
+    type OrderSymbol,
+    type Profile,
+} from "../api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
 import { ref, watch } from "vue";
 import { toast } from "vue-sonner";
+
+const props = defineProps<{ profile?: { data: Profile } }>();
 
 const symbol = ref<OrderSymbol | undefined>(undefined);
 const side = ref<number | undefined>(undefined);
@@ -24,6 +33,34 @@ const ordersQuery = useQuery({
             status: status.value?.toString() ?? "",
         }),
 });
+
+useEcho(
+    `private-user.${props.profile?.data.id}`,
+    ["OrderMatched"],
+    (e: { order: Order }) => {
+        queryClient.setQueryData(
+            [
+                "pastorder",
+                {
+                    symbol: symbol.value,
+                    side: side.value,
+                    status: status.value,
+                },
+            ],
+            (oldData: { data: Order[] }) => {
+                return {
+                    ...oldData,
+                    data: oldData.data.map((order) => {
+                        if (order.id === e.order.id) {
+                            return e.order;
+                        }
+                        return order;
+                    }),
+                };
+            }
+        );
+    }
+);
 
 const cancelOrderMutation = useMutation({
     onSuccess: () => {
