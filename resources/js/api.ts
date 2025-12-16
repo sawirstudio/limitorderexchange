@@ -28,7 +28,9 @@ type Asset = {
 };
 
 const httpClient = ky.extend({
-    prefixUrl: "https://virgosoft-orderexchange.test/api",
+    prefixUrl:
+        (import.meta.env.VITE_APP_URL ??
+            "https://orderexchange.sawirstudio.com") + "/api",
     headers: {
         Accept: "application/json",
         "X-Platform": "web",
