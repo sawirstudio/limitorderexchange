@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class GetOrderbookController extends Controller
 {
+    /**
+     * @unauthenticated
+     */
     public function __invoke(Request $request)
     {
         $results = DB::select('with ranked_buys as (

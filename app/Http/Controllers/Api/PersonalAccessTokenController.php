@@ -12,6 +12,9 @@ use Illuminate\Validation\ValidationException;
 
 class PersonalAccessTokenController extends Controller
 {
+    /**
+     * @unauthenticated
+     */
     public function store(CreatePersonalAccessTokenRequest $request)
     {
         $user = User::query()->where('email', $request->email)->first();
