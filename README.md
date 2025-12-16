@@ -20,4 +20,9 @@ php artisan migrate:fresh --seed
 
 4. You can run it using php artisan serve or visit https://orderexchange.sawirstudio.com
 
+Login credentials:
+
+Username: test@example.com
+Password: password
+
 5. for testing, you can run it using php artisan test
