@@ -28,7 +28,7 @@ class CancelLimitOrderController extends Controller
         update orders set status = 3 where id = ? returning user_id, symbol, side, (price * amount) as volume
         ),
         release_locked_asset as (
-            update assets set amount = amount + locked_amount, locked_amount = null where exists(select 1 from ord where ord.side is false and ord.user_id = assets.user_id and ord.symbol = assets.symbol) returning amount
+            update assets set amount = amount + locked_amount, locked_amount = 0 where exists(select 1 from ord where ord.side is false and ord.user_id = assets.user_id and ord.symbol = assets.symbol) returning amount
         ),
         release_locked_balance as (
             update users set balance = balance + (select volume from ord) where exists(select 1 from ord where ord.side is true and ord.user_id = users.id) returning balance

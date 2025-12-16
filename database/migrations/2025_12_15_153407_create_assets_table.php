@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('symbol')->default('BTC');
             $table->decimal('amount', 19, 8)->default(0);
-            $table->decimal('locked_amount', 19, 8)->nullable();
+            $table->decimal('locked_amount', 19, 8)->default(0);
             $table->timestamps();
 
             $table->index(['user_id', 'symbol']);
