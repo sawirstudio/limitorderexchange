@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Symbol;
+use App\Models\Asset;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,5 +23,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        foreach (Symbol::cases() as $symbol) {
+            Asset::factory()->create([
+                'symbol' => $symbol,
+                'user_id' => 1,
+            ]);
+        }
     }
 }
