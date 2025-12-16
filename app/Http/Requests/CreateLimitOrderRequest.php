@@ -15,21 +15,25 @@ class CreateLimitOrderRequest extends FormRequest
         return [
             'side' => ['required', 'boolean'],
             'symbol' => ['required', Rule::enum(Symbol::class)],
-            'amount' => ['required', Rule::numeric()
-                ->greaterThan(0)
-                ->max($this->boolean('side')
-                ? $this->user()->balance
-                : $this->assets()
-                    ->where('symbol', $this->enum('symbol', Symbol::class))
-                    ->value('amount', 0)),
+            'price' => ['required', Rule::numeric()->greaterThan(0)],
+            'amount' => [
+                'required',
+                Rule::numeric()
+                    ->greaterThan(0)
+                    ->max(
+                        $this->boolean('side')
+                            ? $this->user()->balance
+                            : $this->assets()->where('symbol', $this->enum('symbol', Symbol::class))->value(
+                                'amount',
+                                0,
+                            ),
+                    ),
             ],
         ];
     }
 
     public function assets()
     {
-        return once(fn () => Asset::query()
-            ->whereBelongsTo($this->user())
-            ->get());
+        return once(fn() => Asset::query()->whereBelongsTo($this->user())->get());
     }
 }
