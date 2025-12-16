@@ -33,7 +33,9 @@ class AppServiceProvider extends ServiceProvider
         URL::forceHttps();
         Date::use(CarbonImmutable::class);
         DB::prohibitDestructiveCommands(app()->isProduction());
-        Password::defaults(fn (): ?Password => app()->isProduction() ? Password::min(12)->max(255)->uncompromised() : null);
+        Password::defaults(fn(): null|Password => app()->isProduction()
+            ? Password::min(12)->max(255)->uncompromised()
+            : null);
         Model::shouldBeStrict();
         Model::unguard();
         if (app()->runningUnitTests()) {
