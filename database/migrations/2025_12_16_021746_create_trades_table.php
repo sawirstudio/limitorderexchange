@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('trades', function (Blueprint $table) {
             $table->id();
             $table->decimal('fee');
+            $table->decimal('amount', 19, 8);
+            $table->decimal('price', 19, 8);
+            $table->unsignedBigInteger('makerorder_id');
+            $table->unsignedBigInteger('order_id');
             $table->timestamps();
         });
     }
